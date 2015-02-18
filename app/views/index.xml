@@ -1,0 +1,5 @@
+<Alloy>
+	<Window class="container">
+		<Button id="boton" onClick="geoLocalizar" title="¿Dónde estoy?" />
+	</Window>
+</Alloy>
