@@ -5,20 +5,20 @@ var latitud = args.latitud;
 var longitud = args.longitud;
 var titulo = args.titulo;
 
-// create annotation
+// Creamos la anotación
 var annotation = Alloy.Globals.Map.createAnnotation({
 	latitude : Number(latitud),
 	longitude : Number(longitud),
 	title : titulo,
 });
 
-// set the header
+// Header
 $.title.text = titulo;
 
-// add them to map
+// Añadimos la anotación al mapa
 $.mapview.setAnnotations([annotation]);
 
-// set the region around the photo
+// Configuramos la región
 $.mapview.setRegion({
 	latitude : annotation.latitude,
 	longitude : annotation.longitude,
@@ -35,7 +35,7 @@ function androidBackEventHandler(_event) {
 	$.getView().close();
 }
 
-// Setup the menus and actionBar for Android if necessary
+// Configuración del ActionBar
 $.getView().addEventListener("open", function() {
 	OS_ANDROID && ($.getView().activity.onCreateOptionsMenu = function() {
 		var actionBar = $.getView().activity.actionBar;
