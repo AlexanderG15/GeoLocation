@@ -8,17 +8,21 @@ function geoLocalizar() {
 
 		console.log(JSON.stringify(_datos, null, 4));
 
+		// Si hay datos
 		if (_datos) {
 			//alert("Estoy en: \n" + _datos.title);
 
-			//Lanzar el mapa con los datos
+			// Instancio el controlador pasándole los datos como parámetros
 			var controladorMapa = Alloy.createController("vistaMapa", {
 				latitud : _datos.coords.latitude,
 				longitud : _datos.coords.longitude,
 				titulo : _datos.title
 			});
-
+			
+			// Obtengo la vista resultante 
 			var vistaMapa = controladorMapa.getView();
+			
+			// Abro la vista
 			vistaMapa.open();
 
 		} else {

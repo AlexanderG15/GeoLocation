@@ -50,7 +50,7 @@ function reverseGeocoder(_lat, _lng, _callback) {
  *
  * @param {Object} _location
  */
-// Maneja el evento 'location' y las propiedades que devuelve AUTOMÁTIAMENTE del evento
+// Maneja el evento 'location' y las propiedades que devuelve AUTOMÁTICAMENTE del evento (http://docs.appcelerator.com/titanium/3.0/#!/guide/Tracking_Position_and_Heading)
 function locationCallbackHandler(_location) {
 
 	// Eliminamos la suscripción al evento 'location', ya no lo necesitamos
@@ -60,6 +60,7 @@ function locationCallbackHandler(_location) {
 	// Nos aseguramos de no hay error y tenemos unas coordenadas listas
 	if (!_location.error && _location && _location.coords) {
 		
+		// Ha funcionado, no queremos una cancelación
 		clearTimeout(cuentaAtras);
 
 		var lat,
@@ -104,6 +105,7 @@ function locationCallbackHandler(_location) {
 // se suscribe al evento 'location'
 exports.getCurrentLocation = function(_callback) {
 
+	// Si en 10 segundos no tenemos respuesta del GPS, abortamos
 	cuentaAtras = setTimeout(function() {
 		Ti.App.fireEvent('noGps');
 		Ti.Geolocation.removeEventListener('location', locationCallbackHandler);
@@ -127,6 +129,6 @@ exports.getCurrentLocation = function(_callback) {
 	Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_HIGH;
 	Ti.Geolocation.distanceFilter = 10;
 
-	// Escuchamos la resupuesta con las coordenadas y cuando ocurran llamamos a locationCallbackHandler
+	// Escuchamos la resupuesta (evento location) con las coordenadas y cuando ocurran llamamos a locationCallbackHandler
 	Ti.Geolocation.addEventListener('location', locationCallbackHandler);
 };
